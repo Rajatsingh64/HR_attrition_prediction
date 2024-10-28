@@ -1,6 +1,13 @@
 pandas
 numpy
 matplotlib
+setuptools
+httptools
+apache-airflow
 seaborn 
 plotly 
+imblearn
+pymongo
+dill
 python-dotenv
+-e .
