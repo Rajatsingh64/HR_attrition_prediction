@@ -8,6 +8,8 @@ seaborn
 plotly 
 imblearn
 pymongo
+scikit-learn
+lazypredict
 dill
 python-dotenv
 -e .
