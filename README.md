@@ -1,4 +1,4 @@
-# Human Resources Machine Learning Project: Predicting Employee Turnover
+# Human Resources Machine Learning Project: Predicting Employee Attrition
 
 ## Objective
 To predict whether an employee will leave the company (attrition) based on various features such as age, job satisfaction, salary, etc.
