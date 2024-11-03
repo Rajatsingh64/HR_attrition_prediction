@@ -3,6 +3,7 @@ from src.component.data_validation import DataValidation
 from src.component.data_transformation import DataTransformation
 from src.component.model_training import ModelTrainer
 from src.component.model_evaluation import ModelEvaluation
+from src.component.model_pusher import ModelPusher
 from src.entity.config_entity import TrainingPipelineConfig , DataIngestionConfig ,DataValidationConfig ,DataTransformationConfig , ModelTrainerConfig
 from src.entity import config_entity
 from src.logger import logging
@@ -51,6 +52,14 @@ if __name__=="__main__":
         model_eva_artifact=model_evaluation.initiate_model_evaluation()
         print(f"{">"*20} Model Evaluation Completed Sucessfully {"<"*20}")
         logging.info(f"{">"*20} Model Evaluation Completed Sucessfully {"<"*20}")
+
+        #Model Pusher
+        model_pusher_config=config_entity.ModelPusherConfig(training_pipeline_config)
+        model_pusher=ModelPusher(model_pusher_config , data_tranformation_artifact , model_trainer_artifact)
+        model_pusher_artifact=model_pusher.initiate_model_pusher()
+        print(f"{">"*20} Model Pusher  Initiated Sucessfully {"<"*20}")
+        logging.info(f"{">"*20} Model Pusher Initiated Sucessfully {"<"*20}")
+
 
     except Exception as e:
         raise ProjectException(e ,sys)   

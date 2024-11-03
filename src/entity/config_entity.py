@@ -47,7 +47,7 @@ class DataTransformationConfig:
 
         try:
             self.data_transformation_dir=os.path.join(training_pipeline_config.artifact_dir , "data_transformation")
-            self.data_transformation_object_path=os.path.join(self.data_transformation_dir , "transformation.pkl")
+            self.data_transformation_object_path=os.path.join(self.data_transformation_dir , "transformer.pkl")
             self.data_transformation_train_path=os.path.join(self.data_transformation_dir , "transformed" , "train.npz")
             self.data_transformation_test_path=os.path.join(self.data_transformation_dir , "transformed" , "test.npz")
             
@@ -66,7 +66,14 @@ class ModelEvaluationConfig:
 
     def __init__(self ,training_pipeline_config:TrainingPipelineConfig ):
              self.change_threshold = 0.1
-            
-
+    
 class ModelPusherConfig:
-    pass
+
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_pusher_dir = os.path.join(training_pipeline_config.artifact_dir , "model_pusher")
+        self.saved_model_dir = os.path.join("saved_models")
+        self.pusher_model_dir = os.path.join(self.model_pusher_dir,"saved_models")
+        self.pusher_model_path = os.path.join(self.pusher_model_dir,"model.pkl")
+        self.pusher_transformer_path = os.path.join(self.pusher_model_dir,"transformer.pkl")
+             
+    
