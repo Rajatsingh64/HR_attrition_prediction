@@ -10,6 +10,7 @@ imblearn
 pymongo
 scikit-learn
 lazypredict
+alibi_detect
 dill
 python-dotenv
 -e .
