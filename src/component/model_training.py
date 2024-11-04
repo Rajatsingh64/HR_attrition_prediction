@@ -3,6 +3,7 @@ from src.exception import ProjectException
 from src.logger import logging
 from xgboost import XGBClassifier
 from sklearn.metrics import f1_score
+from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV , RandomizedSearchCV
 from src.utils import load_numpy_array_data , save_object
 import pandas as pd

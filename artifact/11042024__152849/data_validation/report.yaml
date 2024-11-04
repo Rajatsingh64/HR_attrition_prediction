@@ -1,0 +1,218 @@
+data_drift_within_test_dataset:
+  Absences:
+    pvalues: 0.9882136911443752
+    same_distribution: true
+  CitizenDesc:
+    pvalues: 0.9984142650855502
+    same_distribution: true
+  DOB:
+    pvalues: 0.23895982898822626
+    same_distribution: true
+  DateofHire:
+    pvalues: 0.7743710189543962
+    same_distribution: true
+  DaysLateLast30:
+    pvalues: 1.0
+    same_distribution: true
+  Department:
+    pvalues: 0.5078012846378148
+    same_distribution: true
+  DeptID:
+    pvalues: 0.9956957688068495
+    same_distribution: true
+  EmpID:
+    pvalues: 0.983485787650431
+    same_distribution: true
+  EmpSatisfaction:
+    pvalues: 0.9999999999997683
+    same_distribution: true
+  EmpStatusID:
+    pvalues: 0.9999999967805886
+    same_distribution: true
+  Employee_Name:
+    pvalues: 0.23895982898822626
+    same_distribution: true
+  EmploymentStatus:
+    pvalues: 0.7242523749094352
+    same_distribution: true
+  EngagementSurvey:
+    pvalues: 0.9999985627410026
+    same_distribution: true
+  FromDiversityJobFairID:
+    pvalues: 1.0
+    same_distribution: true
+  GenderID:
+    pvalues: 0.9971125621355846
+    same_distribution: true
+  HispanicLatino:
+    pvalues: 0.8154346183431368
+    same_distribution: true
+  LastPerformanceReview_Date:
+    pvalues: 0.4539460283847662
+    same_distribution: true
+  ManagerID:
+    pvalues: .nan
+    same_distribution: false
+  ManagerName:
+    pvalues: 0.8934215809514375
+    same_distribution: true
+  MaritalDesc:
+    pvalues: 2.123182544090444e-05
+    same_distribution: false
+  MaritalStatusID:
+    pvalues: 0.6973031928559844
+    same_distribution: true
+  MarriedID:
+    pvalues: 0.9998695027355002
+    same_distribution: true
+  PerfScoreID:
+    pvalues: 1.0
+    same_distribution: true
+  PerformanceScore:
+    pvalues: 0.8010436767619855
+    same_distribution: true
+  Position:
+    pvalues: 0.9999999999993625
+    same_distribution: true
+  PositionID:
+    pvalues: 0.9999999932366344
+    same_distribution: true
+  RaceDesc:
+    pvalues: 0.49719407864451903
+    same_distribution: true
+  RecruitmentSource:
+    pvalues: 0.7986174593799247
+    same_distribution: true
+  Salary:
+    pvalues: 0.9236495755202865
+    same_distribution: true
+  Sex:
+    pvalues: 0.5523331406681347
+    same_distribution: true
+  SpecialProjectsCount:
+    pvalues: 0.9997751226168365
+    same_distribution: true
+  State:
+    pvalues: 0.9999999999736316
+    same_distribution: true
+  TermReason:
+    pvalues: 0.7731551577763967
+    same_distribution: true
+  Termd:
+    pvalues: 1.0
+    same_distribution: true
+  Zip:
+    pvalues: 0.31740678309630105
+    same_distribution: true
+data_drift_within_train_dataset:
+  Absences:
+    pvalues: 0.9999998344073626
+    same_distribution: true
+  CitizenDesc:
+    pvalues: 0.9736127789977205
+    same_distribution: true
+  DOB:
+    pvalues: 0.2429930239363054
+    same_distribution: true
+  DateofHire:
+    pvalues: 0.8037771268343258
+    same_distribution: true
+  DaysLateLast30:
+    pvalues: 1.0
+    same_distribution: true
+  Department:
+    pvalues: 0.6220451080519537
+    same_distribution: true
+  DeptID:
+    pvalues: 0.9999999915903176
+    same_distribution: true
+  EmpID:
+    pvalues: 0.9999995379691403
+    same_distribution: true
+  EmpSatisfaction:
+    pvalues: 1.0
+    same_distribution: true
+  EmpStatusID:
+    pvalues: 1.0
+    same_distribution: true
+  Employee_Name:
+    pvalues: 0.23941050379747947
+    same_distribution: true
+  EmploymentStatus:
+    pvalues: 0.8513433545299062
+    same_distribution: true
+  EngagementSurvey:
+    pvalues: 1.0
+    same_distribution: true
+  FromDiversityJobFairID:
+    pvalues: 1.0
+    same_distribution: true
+  GenderID:
+    pvalues: 0.99999999754364
+    same_distribution: true
+  HispanicLatino:
+    pvalues: 0.11987411387599373
+    same_distribution: true
+  LastPerformanceReview_Date:
+    pvalues: 0.9961766173315476
+    same_distribution: true
+  ManagerID:
+    pvalues: .nan
+    same_distribution: false
+  ManagerName:
+    pvalues: 0.09619015480665162
+    same_distribution: true
+  MaritalDesc:
+    pvalues: 0.3149046268731129
+    same_distribution: true
+  MaritalStatusID:
+    pvalues: 0.9955603467699292
+    same_distribution: true
+  MarriedID:
+    pvalues: 0.9999999999997102
+    same_distribution: true
+  PerfScoreID:
+    pvalues: 1.0
+    same_distribution: true
+  PerformanceScore:
+    pvalues: 0.46134207638084546
+    same_distribution: true
+  Position:
+    pvalues: 0.3278120017464036
+    same_distribution: true
+  PositionID:
+    pvalues: 1.0
+    same_distribution: true
+  RaceDesc:
+    pvalues: 0.9702892336641901
+    same_distribution: true
+  RecruitmentSource:
+    pvalues: 0.6288267580295365
+    same_distribution: true
+  Salary:
+    pvalues: 0.9999488928297168
+    same_distribution: true
+  Sex:
+    pvalues: 0.6794184912105226
+    same_distribution: true
+  SpecialProjectsCount:
+    pvalues: 0.9999999999985901
+    same_distribution: true
+  State:
+    pvalues: 9.411677355192022e-07
+    same_distribution: false
+  TermReason:
+    pvalues: 0.9994962664047089
+    same_distribution: true
+  Termd:
+    pvalues: 1.0
+    same_distribution: true
+  Zip:
+    pvalues: 0.9150800216607523
+    same_distribution: true
+missing_values_within_base_dataset:
+- DateofTermination
+missing_values_within_test_dataset:
+- DateofTermination
+missing_values_within_train_dataset:
+- DateofTermination

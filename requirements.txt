@@ -4,13 +4,16 @@ matplotlib
 setuptools
 httptools
 apache-airflow
-seaborn 
-plotly 
+seaborn
+ipykernel 
+plotly
+jupyter 
 imblearn
 pymongo
 scikit-learn
 lazypredict
 alibi_detect
+scipy
 dill
 python-dotenv
 -e .

@@ -11,7 +11,7 @@ from src.exception import ProjectException
 import os , sys
 
 
-if __name__=="__main__":
+def start_training_pipeline():
 
     try:
         #Training Pipeline main Directory artifact
