@@ -13,7 +13,7 @@ with DAG(
     # [END default_args]
     description='HR Attrition Prediction',
     schedule_interval="@weekly",
-    start_date=pendulum.datetime(2024, 11, 25, tz="UTC"),
+    start_date=pendulum.datetime(2024, 11, 10, tz="UTC"),
     catchup=False,
     tags=['example'],
 ) as dag:
