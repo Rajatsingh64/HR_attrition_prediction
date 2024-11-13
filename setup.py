@@ -1,28 +1,27 @@
-from setuptools import find_packages , setup 
-import os , sys 
-from typing import List 
+from setuptools import find_packages,setup
 
-requirement_file= "requirements.txt"
+from typing import List
 
-with open (requirement_file)  as file:
-    requirement_list = file.readlines() #reading requirements.txt line by line and store name inside list
-#removing  "/n"  or space from require_list 
-requirement_list = [require_name.replace("\n" , "") for require_name in requirement_list if "\n" in require_name]  
-if "_e ." in requirement_list:
-    requirement_list.remove("_e .")
+REQUIREMENT_FILE_NAME="requirements.txt"
+HYPHEN_E_DOT = "-e ."
+
+def get_requirements()->List[str]:
+    
+    with open(REQUIREMENT_FILE_NAME) as requirement_file:
+        requirement_list = requirement_file.readlines()
+    requirement_list = [requirement_name.replace("\n", "") for requirement_name in requirement_list]
+    
+    if HYPHEN_E_DOT in requirement_list:
+        requirement_list.remove(HYPHEN_E_DOT)
+    return requirement_list
 
 
-#making Project package
 
 setup(
-     name="src" , 
-     author="Rajat Singh" , 
-     author_email="rajat.k.singh64@gmail.com" , 
-     version="0.1" , 
-     packages=find_packages()  , 
-     install_requires = requirement_list
-
-
- 
+    name="src",
+    version="0.0.2",
+    author="Rajat Singh",
+    author_email="rajat.k.singh64@gmail.com",
+    packages = find_packages(),
+    install_requires=get_requirements(),
 )
- 
