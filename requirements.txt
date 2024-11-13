@@ -21,8 +21,4 @@ PyYAML
 numpy
 scipy
 apache-airflow
-jupyter
-ploly
-seaborn
-matplotlib
 -e .

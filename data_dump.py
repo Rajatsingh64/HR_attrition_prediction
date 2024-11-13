@@ -18,15 +18,15 @@ def dump_data_into_mongodb():
 
         # Convert dataset to dictionary format for MongoDB insertion
         dict_data = df.to_dict(orient="records")
-        mongo_client[database_name][collection_name].delete_many({}) # it will delete previous values , to avoid  dupicates values of same dataset.
+        #mongo_client[database_name][collection_name].delete_many({}) # it will delete previous values , to avoid  dupicates values of same dataset.
         mongo_client[database_name][collection_name].insert_many(dict_data)
-        logging.info(f"{">"*20} Dataset successfully inserted into MongoDB database {">"*20}")
+        logging.info(f'{">"*20} Dataset successfully inserted into MongoDB database {">"*20}')
     except Exception as e:
         raise ProjectException(e, sys)
 
 if __name__ == "__main__":
     try:
         dump_data_into_mongodb()
-        print(f"{">"*20} Dataset successfully inserted into MongoDB database {">"*20}")
+        print(f'{">"*20} Dataset successfully inserted into MongoDB database {">"*20}')
     except Exception as e:
         raise ProjectException(e, sys)
