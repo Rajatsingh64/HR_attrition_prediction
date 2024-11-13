@@ -20,7 +20,7 @@ class ModelEvaluation:
                    data_transformation_artifact:artifact_entity.DataTransformationArtifact ,
                     model_trainer_artifact:artifact_entity.ModelTrainerArtifact ):
         try:
-            logging.info(f"{">"*20} Model Evaluation {"<"*20}")
+            logging.info(f'{">"*20} Model Evaluation {"<"*20}')
             self.model_evaluation_config=model_evaluation_config
             self.data_ingestion_artifact=data_ingestion_artifact
             self.data_transformation_artifact=data_transformation_artifact

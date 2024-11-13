@@ -16,7 +16,7 @@ class DataTransformation:
                  data_transformation_config:config_entity.DataTransformationConfig,
                  data_ingestion_artifact:artifact_entity.DataIngestionArtifact):
         try:
-            logging.info(f"{">"*20} Data Transformation {"<"*20}")
+            logging.info(f'{">"*20} Data Transformation {"<"*20}')
             self.data_transformation_config=data_transformation_config
             self.data_ingestion_artifact=data_ingestion_artifact
         except Exception as e:
