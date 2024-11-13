@@ -15,7 +15,7 @@ logging.info(f"loading .env ")
 
 @dataclass
 class EnvironmentVariable:
-    mongo_url:str = os.getenv("MONGO_URL")  #Loading mongo url from dot env file
+    mongo_url:str = os.getenv("MONGO_DB_URL")  #Loading mongo url from dot env file
 
 env = EnvironmentVariable() #instance
 
