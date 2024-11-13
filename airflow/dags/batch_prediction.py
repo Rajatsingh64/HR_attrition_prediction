@@ -8,12 +8,12 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'HR_Attrision',
+    'HR_Attrition',
     default_args={'retries': 2},
     # [END default_args]
     description='HR Attrition Prediction',
     schedule_interval="@weekly",
-    start_date=pendulum.datetime(2022, 12, 11, tz="UTC"),
+    start_date=pendulum.datetime(2024, 11, 25, tz="UTC"),
     catchup=False,
     tags=['example'],
 ) as dag:
