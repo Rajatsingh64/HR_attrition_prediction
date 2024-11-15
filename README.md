@@ -36,3 +36,18 @@ Rajat Singh at Unified Mentor
 ### Additional Files
 - **research.ipynb**: Jupyter notebook for exploratory data analysis (EDA).
 - **.env**: File for sensitive information like passwords and MongoDB URLs.
+
+**Docker activatein awscli:**
+  - curl -fsSL https://get.docker.com -o get-docker.sh
+  - sudo sh get-docker.sh
+  - sudo usermod -aG docker ubuntu
+  - newgrp docker 
+
+**Github actions Secrets:**
+  - AWS_ACCESS_KEY_ID=
+  - AWS_SECRET_ACCESS_KEY=
+  - AWS_REGION=
+  - AWS_ECR_LOGIN_URI=
+  - ECR_REPOSITORY_NAME=
+  - BUCKET_NAME=
+  - MONGO_DB_URL=  
