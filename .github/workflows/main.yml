@@ -1,4 +1,4 @@
-name: workflow
+name: Deploy Airflow to AWS ECR
 
 on:
   push:
@@ -14,13 +14,17 @@ jobs:
     name: Continuous Delivery
     runs-on: ubuntu-latest
     steps:
+      # Checkout the code from GitHub repository
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      # Install necessary utilities like jq and unzip
       - name: Install Utilities
         run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
 
+      # Configure AWS credentials using GitHub Secrets
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -28,10 +32,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      # Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-    
+
+      # Build and Push the Docker image to ECR, passing Airflow secrets as build arguments
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
@@ -39,17 +45,24 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build \
+            --build-arg AIRFLOW_EMAIL=${{ secrets.AIRFLOW_EMAIL }} \
+            --build-arg AIRFLOW_USERNAME=${{ secrets.AIRFLOW_USERNAME }} \
+            --build-arg AIRFLOW_PASSWORD=${{ secrets.AIRFLOW_PASSWORD }} \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
 
-  Continuous-Deployment:
+  continuous-deployment:
+    name: Continuous Deployment
     needs: build-and-push-ecr-image
     runs-on: self-hosted
     steps:
-      - name: Checkout
+      # Checkout the code again (if needed for further steps)
+      - name: Checkout Code
         uses: actions/checkout@v3
   
+      # Configure AWS credentials again for deployment
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -57,29 +70,37 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
   
+      # Install utilities on the self-hosted runner (if not already installed)
       - name: Install Utilities
         run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
   
+      # Login to Amazon ECR to pull the Docker image
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
     
-      - name: Pull docker image
+      # Pull the Docker image from ECR
+      - name: Pull Docker image
         run: |
           docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-  
-      - name: Run Docker Image to serve users
+
+      # Set Airflow secrets as environment variables before running the container and start via docker-compose
+      - name: Set Airflow Secrets and Run Docker Image
         run: |
           export IMAGE_NAME="${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest"
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           export AWS_DEFAULT_REGION="${{ secrets.AWS_REGION }}"
           export BUCKET_NAME="${{ secrets.BUCKET_NAME }}"
-          export MONGO_DB_URL="${{ secrets.MONGO_DB_URL}}"
+          export MONGO_DB_URL="${{ secrets.MONGO_DB_URL }}"
+          export AIRFLOW_EMAIL="${{ secrets.AIRFLOW_EMAIL }}"
+          export AIRFLOW_USERNAME="${{ secrets.AIRFLOW_USERNAME }}"
+          export AIRFLOW_PASSWORD="${{ secrets.AIRFLOW_PASSWORD }}"
           docker compose up -d
 
+      # Clean up old Docker images to prevent accumulation of unused images
       - name: Docker System Prune to Remove Old Images
         run: |
           docker system prune -f

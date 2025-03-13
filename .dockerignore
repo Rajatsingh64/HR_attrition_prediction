@@ -1,0 +1,17 @@
+artifact
+logs
+notebook
+prediction
+saved_models
+*.egg-info
+.env
+data_dump.py
+main.py
+README.md
+test.ipynb
+research.ipynb
+Project demo
+Project details
+data_dump.py
+HR Project Report.pdf
+test.py

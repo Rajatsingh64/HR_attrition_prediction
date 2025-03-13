@@ -8,6 +8,8 @@ import os,sys
 from datetime import datetime
 from src.config import important_features ,TARGET_COLUMN
 from src.utils import parse_date_DOB , parse_date_for_tenure , calculate_age , calculate_tenure
+import warnings
+warnings.filterwarnings("ignore")
 PREDICTION_DIR="prediction"
 
 
@@ -50,6 +52,7 @@ def start_batch_prediction(input_file_path):
         
         df["Prediction"] = prediction #adding new column for Prediction 
         df["Cat_Prediction"]=df["Prediction"].replace({0:"Not Terminated" , 1:"Terminated"}) #new column Prediction Categorical values
+        
         prediction_file_name = os.path.basename(input_file_path).replace(".csv",f"{datetime.now().strftime('%m%d%Y__%H%M%S')}.csv")
         prediction_file_path = os.path.join(PREDICTION_DIR,prediction_file_name)
         df.to_csv(prediction_file_path,index=False,header=True)

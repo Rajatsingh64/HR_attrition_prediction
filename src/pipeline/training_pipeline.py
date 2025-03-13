@@ -8,6 +8,8 @@ from src.entity.config_entity import TrainingPipelineConfig , DataIngestionConfi
 from src.entity import config_entity
 from src.logger import logging
 from src.exception import ProjectException
+import warnings
+warnings.filterwarnings("ignore")
 import os , sys
 
 

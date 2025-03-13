@@ -1,4 +1,4 @@
-from src.pipeline.trainng_pipeline import start_training_pipeline
+from src.pipeline.training_pipeline import start_training_pipeline
 from src.pipeline.batch_prediction import start_batch_prediction
 from src.exception import ProjectException
 import os , sys
