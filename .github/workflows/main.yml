@@ -16,7 +16,7 @@ jobs:
     steps:
       # Checkout the code from GitHub repository
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Install necessary utilities like jq and unzip
       - name: Install Utilities
@@ -45,11 +45,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: latest
         run: |
-          docker build \
-            --build-arg AIRFLOW_EMAIL=${{ secrets.AIRFLOW_EMAIL }} \
-            --build-arg AIRFLOW_USERNAME=${{ secrets.AIRFLOW_USERNAME }} \
-            --build-arg AIRFLOW_PASSWORD=${{ secrets.AIRFLOW_PASSWORD }} \
-            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
 
@@ -58,11 +54,20 @@ jobs:
     needs: build-and-push-ecr-image
     runs-on: self-hosted
     steps:
-      # Checkout the code again (if needed for further steps)
+      
+      # Clean up the workspace to prevent leftover permission issues
+      - name: Clean workspace
+        run: sudo rm -rf $GITHUB_WORKSPACE/*
+
+      # Fix file permissions recursively in the workspace
+      - name: Fix file permissions
+        run: sudo chmod -R 777 $GITHUB_WORKSPACE
+
+      # Checkout Code for deployment
       - name: Checkout Code
-        uses: actions/checkout@v3
-  
-      # Configure AWS credentials again for deployment
+        uses: actions/checkout@v4
+      
+       # Configure AWS credentials again for deployment
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
