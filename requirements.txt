@@ -21,4 +21,5 @@ PyYAML
 numpy
 scipy
 apache-airflow
+psycopg2-binary>=2.9,<3.0
 -e .
