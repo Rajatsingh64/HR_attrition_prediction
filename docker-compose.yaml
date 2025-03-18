@@ -1,22 +1,49 @@
-version: "2"  # Using version 3.8 for compatibility
-
+version: "3.8"
 services:
-  application:
-    image: ${IMAGE_NAME}  # Pulls the image from the specified IMAGE_NAME (e.g., your ECR registry)
-    container_name: hr-attrition123 # Names the container 'customer'
-    ports:
-      - "8080:8080"  # Exposes port 8080 on the host to port 8080 inside the container
+  postgres:
+    image: postgres:13
+    container_name: postgres-airflow
     environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}  # AWS Access Key ID
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}  # AWS Secret Access Key
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}  # AWS Region (e.g., us-west-2)
-      - MONGO_DB_URL=${MONGO_DB_URL}  # MongoDB connection URL
-      - BUCKET_NAME=${BUCKET_NAME}  # Name of the S3 bucket
-      
-      # Airflow-related secrets
-      - AIRFLOW_EMAIL=${AIRFLOW_EMAIL}  # Airflow email
-      - AIRFLOW_USERNAME=${AIRFLOW_USERNAME}  # Airflow username
-      - AIRFLOW_PASSWORD=${AIRFLOW_PASSWORD}  # Airflow password
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
-    # Optionally, add a restart policy in case you want the container to restart on failure or stop
-    restart: always  # Ensures the container restarts on failure or container stop
+  application:
+    image: ${IMAGE_NAME}  # Your custom Airflow image
+    container_name: hr-attrition123
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - MONGO_DB_URL=${MONGO_DB_URL}
+      - BUCKET_NAME=${BUCKET_NAME}
+      - AIRFLOW_EMAIL=${AIRFLOW_EMAIL}
+      - AIRFLOW_USERNAME=${AIRFLOW_USERNAME}
+      - AIRFLOW_PASSWORD=${AIRFLOW_PASSWORD}
+      
+      # Airflow configs
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=1000
+      - AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True
+      - AIRFLOW__CORE__DAGS_FOLDER=/app/airflow/dags
+
+    volumes:
+      - airflow_dags:/app/airflow/dags 
+      - airflow_logs:/app/airflow/logs 
+
+    restart: always
+
+volumes:
+  postgres_data:
+  airflow_dags:
+  airflow_logs:
