@@ -14,7 +14,7 @@ services:
 
   application:
     image: ${IMAGE_NAME}  # Your custom Airflow image
-    container_name: hr-attrition123
+    container_name: hr-attrition-airflow
     ports:
       - "8080:8080"
     depends_on:
