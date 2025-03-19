@@ -2,36 +2,27 @@ import logging
 import os
 from datetime import datetime
 
-# Suppress unnecessary warnings
-import warnings
-warnings.filterwarnings("ignore")
+# Create log file name with a safe format
+log_file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log'
 
-# Log directory and file setup
-LOG_DIR = os.path.join(os.getcwd(), "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+# Get log directory path
+log_dir = os.path.join(os.getcwd(), "logs")
 
-log_file_name = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-LOG_FILE_PATH = os.path.join(LOG_DIR, log_file_name)
+# Ensure the log directory exists
+os.makedirs(log_dir, exist_ok=True)
 
-# Basic logging configuration
+# Define full path for the log file
+log_file_path = os.path.join(log_dir, log_file_name)
+
+# Configure logging
 logging.basicConfig(
-    filename=LOG_FILE_PATH,
-    filemode='a',  # Append mode to avoid overwriting
-    format="[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO  # Capture INFO and above
+        filename=log_file_path,
+        format="[%(asctime)s] Line: %(lineno)d | %(name)s - %(levelname)s - %(message)s",
+        level=logging.DEBUG,
 )
-
-# Reduce verbosity of external libraries
+    
+#Suppress debug logs from external libraries
+logging.getLogger("matplotlib").setLevel(logging.WARNING)
 logging.getLogger("pymongo").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-logging.getLogger("numexpr.utils").setLevel(logging.WARNING)
-
-# Optional: Log to console as well
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-console_formatter = logging.Formatter("[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s")
-console_handler.setFormatter(console_formatter)
-logging.getLogger().addHandler(console_handler)
-
-# Confirmation
-logging.info("Logger initialized successfully.")
+logging.getLogger("urllib3").setLevel(logging.WARNING) 
+logging.getLogger("numexpr.utils").setLevel(logging.WARNING) 

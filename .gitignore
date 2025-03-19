@@ -167,6 +167,6 @@ logs
 .env
 artifact/
 prediction/
-saved_models
+saved_models/
 local-host.pem
 
