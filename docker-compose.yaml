@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    image: ${IMAGE_NAME}  # Your custom Airflow image
+    image: postgres:13
     container_name: postgres-airflow
     environment:
       POSTGRES_USER: airflow
@@ -13,7 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   application:
-    image: ${IMAGE_NAME} 
+    image: ${IMAGE_NAME}  # Your custom Airflow image
     container_name: hr-attrition123
     ports:
       - "8080:8080"
