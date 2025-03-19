@@ -4,6 +4,7 @@ notebook
 prediction
 saved_models
 *.egg-info
+src.egg-info
 .env
 data_dump.py
 main.py

@@ -44,7 +44,6 @@ def start_training_pipeline():
         model_trainer_artifact = model_trainer.initiate_model_trainer()
         print(f'{"="*20} Model Training Completed Successfully {"="*20}')
        
-
         # Model Evaluation
         model_evaluation_config = config_entity.ModelEvaluationConfig(training_pipeline_config)
         model_evaluation = ModelEvaluation(

@@ -5,8 +5,10 @@ RUN mkdir /app
 COPY . /app/
 WORKDIR /app/
 
+# Upgrade pip
+RUN python -m pip install --upgrade pip
 # Install dependencies
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Set Airflow configuration environment variables
 ENV AIRFLOW_HOME="/app/airflow"
