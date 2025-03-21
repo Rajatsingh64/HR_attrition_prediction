@@ -6,6 +6,9 @@ To predict whether an employee will leave the company (attrition) based on vario
 ## Author
 Rajat Singh at Unified Mentor
 
+![Training](demo/gif_demo/HR_gif_demo1.gif)
+![Predition](demo/gif_demo/HR_gif_demo2.gif)
+
 ## Project Structure
 
 ### Main Project Folder
